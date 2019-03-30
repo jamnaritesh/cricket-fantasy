@@ -1,0 +1,44 @@
+.card-container {
+    width: 100%;
+    display: inline-flex;
+}
+.vs-section {
+    text-align: center;
+    flex: 5;
+}
+
+.vs-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+img.team-image {
+    /* width: 100px;
+    height: 100px; */
+    
+    padding-top: 20px;
+}
+.team-section {
+    display:inline-flex;
+    flex: 1.5;
+    text-align: center;
+}
+.team-details {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 0.75rem;
+}
+
+mat-card.fixture-card.mat-card {
+    text-align: center;
+    margin-top: 15px;
+    padding:0px;
+}
+.team-details h2 {
+    font-size:  1.25rem;
+}
+
+.match-date{
+    font-size: 0.75rem;
+}

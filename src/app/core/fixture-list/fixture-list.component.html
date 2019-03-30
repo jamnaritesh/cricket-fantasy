@@ -1,0 +1,28 @@
+
+<mat-card *ngFor="let item of list | async" class="fixture-card">
+  
+  <div class="card-container">
+    <div class="team-section">
+        <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="" >
+        <div class="team-details">
+            <span class="team-name">{{ item.team1Name }}</span>
+            <h2 class="bets">
+              {{ ( item.team1Bets / (item.team1Bets + item.team2Bets)) * 100 }}
+            </h2>
+        </div>
+    </div>
+    <div class="vs-section">
+      <h2>VS</h2>
+    </div>
+    <div class="team-section">
+        <div class="team-details">
+            <span class="team-name">{{ item.team2Name }}</span>
+            <h2 class="bets">
+               {{ ( item.team2Bets / (item.team1Bets + item.team2Bets)  * 100)}}
+            </h2>
+        </div>
+        <img  class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="" >
+    </div>
+  </div>
+  <span class="match-date">{{ item.date |  date: mediumDate}}</span>
+</mat-card>
