@@ -1,0 +1,12 @@
+<p-sidebar [(visible)]="visibleSidebar1"  position="right" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Menu</h1>
+  <button pButton type="button" (click)="visibleSidebar1 = false; fixturelist=true; results=false;" label="Fixture List" class="ui-button-success"></button><br>
+  <button pButton type="button" (click)="visibleSidebar1 = false; fixturelist=false; results=true;" label="Results" class="ui-button-secondary"></button>
+</p-sidebar>
+<button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right"></button>
+<div *ngIf="fixturelist">
+  <app-fixture-list></app-fixture-list>
+</div>
+<div *ngIf="results">
+  <app-results></app-results>
+</div>

@@ -1,28 +1,116 @@
 
-<mat-card *ngFor="let item of list | async" class="fixture-card">
-  
+
+<!-- <mat-card *ngFor="let item of list | async" class="fixture-card">
+
   <div class="card-container">
     <div class="team-section">
-        <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="" >
-        <div class="team-details">
-            <span class="team-name">{{ item.team1Name }}</span>
-            <h2 class="bets">
-              {{ ( item.team1Bets / (item.team1Bets + item.team2Bets)) * 100 }}
-            </h2>
-        </div>
+      <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="">
+      <div class="team-details">
+        <span class="team-name">{{ item.team1Name }}</span>
+        <h2 class="bets">
+          {{ ( item.team1Bets / (item.team1Bets + item.team2Bets)) * 100 }}
+        </h2>
+      </div>
     </div>
     <div class="vs-section">
       <h2>VS</h2>
     </div>
     <div class="team-section">
-        <div class="team-details">
-            <span class="team-name">{{ item.team2Name }}</span>
-            <h2 class="bets">
-               {{ ( item.team2Bets / (item.team1Bets + item.team2Bets)  * 100)}}
-            </h2>
-        </div>
-        <img  class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="" >
+      <div class="team-details">
+        <span class="team-name">{{ item.team2Name }}</span>
+        <h2 class="bets">
+          {{ ( item.team2Bets / (item.team1Bets + item.team2Bets)  * 100)}}
+        </h2>
+      </div>
+      <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="">
     </div>
   </div>
   <span class="match-date">{{ item.date |  date: mediumDate}}</span>
 </mat-card>
+
+
+<p-dataView [value]="match">
+  <p-header>List of Matches</p-header>
+  <p-footer>Choose from the list.</p-footer>
+  <div *ngFor="let item of match">
+    <ng-template let-car pTemplate="listItem">
+      <div>
+        {{ item.team1Name }}
+      </div>
+    </ng-template>
+    <ng-template let-car pTemplate="gridItem">
+      <div class="ui-g-12 ui-md-3">
+        {{ item.team2Name }}
+      </div>
+    </ng-template>
+  </div>
+</p-dataView> -->
+
+
+<p-dataView #dv [value]="list |async " [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
+  [sortField]="sortField" [sortOrder]="sortOrder">
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-g">
+        <!-- <div class="ui-g-12 ui-md-4">
+          <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By"
+            (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+        </div>
+        <div class="ui-g-6 ui-md-4 filter-container">
+          <div style="position:relative">
+            <input type="search" pInputText placeholder="Search by brand" (keyup)="dv.filter($event.target.value)">
+          </div>
+        </div> -->
+        <div class="ui-g-6 ui-md-4" style="text-align:right">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <div *ngFor="let item of list | async ">
+    <ng-template let-car pTemplate="listItem">
+      <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #d9d9d9">
+        <div class="ui-g-12 ui-md-1" style="text-align:center">
+          <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="">
+        </div>
+        <div class="ui-g-12 ui-md-4 car-details">
+          <div class="ui-g">
+            <div class="ui-g-2 ui-sm-6">Team Name: </div>
+            <div class="ui-g-10 ui-sm-6"><b>{{ item.team1Name }}</b></div>
+
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-2 car-details">
+          <div class="ui-g">
+            <div class="ui-g-10 ui-sm-6"><b>{{ item.date |  date: mediumDate}}</b></div>
+
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-4 car-details">
+          <div class="ui-g">
+            <div class="ui-g-2 ui-sm-6">Team Name: </div>
+            <div class="ui-g-10 ui-sm-6"><b>{{ item.team2Name }}</b></div>
+
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-1" style="text-align:center">
+          <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="">
+        </div>
+        <!-- <div class="ui-g-12 ui-md-1 search-icon">
+          <button pButton type="button" icon="pi pi-search" (click)="selectCar($event, car)"></button>
+        </div> -->
+      </div>
+    </ng-template>
+  <ng-template let-car pTemplate="gridItem">
+    <div style="padding:.5em" class="ui-g-12 ui-md-3">
+      <p-panel [header]="car.vin" [style]="{'text-align':'center'}">
+        <img class="img-responsive" src="./assets/CoqZUvqAgHMDkX32nDHM_w_96x96.png" alt="">
+        <div class="car-detail">{{item.team1Name}} - {{item.team1Bets}}</div>
+        <hr class="ui-widget-content" style="border-top:0">
+        <button pButton type="button" icon="pi pi-search" (click)="selectCar($event, car)"
+          style="margin-top:0"></button>
+      </p-panel>
+    </div>
+  </ng-template>
+  </div>
+</p-dataView>
